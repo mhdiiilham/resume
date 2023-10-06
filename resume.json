@@ -1,0 +1,146 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Muhammad Ilham",
+    "label": "Backend Engineer",
+    "image": "",
+    "email": "muhd.iiilham@gmail.com",
+    "phone": "(+62) 896-5887-6167",
+    "url": "https://muhammadilham.xyz",
+    "summary": "Experienced backend engineer with a passion for programming and a strong track record in the technology industry. Fluent in Go, with experience using PHP, Laravel, and NodeJS to develop scalable, secure backend systems. Skilled in working with Docker, Google Cloud Platform, and AWS, and experienced in implementing continuous integration and deployment strategies using Bitbucket CI/CD and GitHub Actions. Strong logic skills, a love for exploring new technologies, and a commitment to writing high-quality code with comprehensive unit testing and a TDD approach.",
+    "location": {
+      "address": "",
+      "postalCode": "",
+      "city": "South Jakarta",
+      "countryCode": "ID",
+      "region": "DKI Jakarta"
+    },
+    "profiles": [
+      {
+        "network": "Twitter",
+        "username": "@w8rloO",
+        "url": "https://twitter.com/w8rloO"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "muhammad-ilham-491a99194",
+        "url": "https://www.linkedin.com/in/muhammad-ilham-491a99194"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "AnyMind Group",
+      "location": "Tokyo, Japan",
+      "description": "",
+      "position": "Middle Backend Engineer",
+      "url": "https://anymindgroup.com",
+      "startDate": "2023-04",
+      "summary": "",
+      "highlights": []
+    },
+    {
+      "name": "Amartha",
+      "location": "Jakarta, Indonesia",
+      "description": "",
+      "position": "Software Engineer Analyst - Backend",
+      "url": "https://amartha.com",
+      "startDate": "2021-08",
+      "endDate": "2023-04",
+      "summary": "",
+      "highlights": [
+        "Collaborated with colleagues to create a service that calculates investor portfolios on a daily basis, using GCP Pub/Sub.",
+        "Provided support to other teams to connect their services with the Core Banking System Temenos T24.",
+        "Worked on the User Convergence Team to develop a Single Sign-On service for internal users, utilizing KeyCloak and KrakenD API Gateway technologies.",
+        "Contributed to the development and maintenance of the Financial Platform team."
+      ]
+    },
+    {
+      "name": "KlikACC",
+      "location": "Jakarta, Indonesia",
+      "description": "",
+      "position": "Back End Developer",
+      "url": "https://klika2c.co.id",
+      "startDate": "2020-04",
+      "endDate": "2021-07",
+      "summary": "",
+      "highlights": [
+        "Maintenance and development of new features for back-office applications using Laravel and JQuery.",
+        "Rewrite legacy code using the newer version of Laravel and implement RESTful API best practices.",
+        "Created internal SDK to integrate with third-party digital signing provider.",
+        "Develop new internal service for the branch office using Go and ship the application using Docker."
+      ]
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "BINUS University",
+      "url": "http://binus.edu",
+      "area": "Computer Science",
+      "studyType": "Bachelor",
+      "startDate": "2023-08-01",
+      "endDate": "2027-08-01",
+      "score": "",
+      "courses": []
+    }
+  ],
+  "awards": [],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Backend Development",
+      "level": "EXPERIENCED",
+      "keywords": [
+        "Go",
+        "Golang",
+        "Cloud Computing",
+        "Google Cloud Platform",
+        "GCP",
+        "gRPC",
+        "GraphQL",
+        "SQL",
+        "OAuth",
+        "Kubernetes",
+        "Concurrent Programming",
+        "REST APIs",
+        "PostgreSQL",
+        "MariaDB",
+        "MongoDB",
+        "Test Driven Development",
+        "KeyCloak",
+        "Laravel",
+        "Ruby On Rails",
+        "CI/CD"
+      ]
+    },
+    {
+      "name": "Web Development",
+      "level": "BEGINNER",
+      "keywords": [
+        "HTML",
+        "JavaScript",
+        "JQuery",
+        "CSS",
+        "Bootstrap",
+        "Vue",
+        "React.js",
+        "Laravel"
+      ]
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Limited working proficiency"
+    }
+  ],
+  "interests": [],
+  "references": [],
+  "projects": [],
+  "meta": {
+    "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/resume.json",
+    "version": "v1.0.0",
+    "lastModified": "2017-12-24T15:53:00"
+  }
+}
