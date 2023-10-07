@@ -15,18 +15,10 @@ import (
 
 type resumeServiceTestSuite struct {
 	suite.Suite
-
-	ctrl           *gomock.Controller
-	mockFileReader *mock.MockFileReader
 }
 
 func TestResumeService(t *testing.T) {
 	suite.Run(t, new(resumeServiceTestSuite))
-}
-
-func (suite *resumeServiceTestSuite) SetupTest() {
-	suite.ctrl = gomock.NewController(suite.T())
-	suite.mockFileReader = mock.NewMockFileReader(suite.ctrl)
 }
 
 func (suite *resumeServiceTestSuite) TestGetBasic() {
@@ -85,13 +77,16 @@ func (suite *resumeServiceTestSuite) TestGetBasic() {
 
 	for _, tt := range testCases {
 		suite.T().Run(tt.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
 			assertion := assert.New(t)
 
 			expectedMockReturn0, _ := tt.generateExpectedMockReturn0(tt.resume)
 
-			suite.mockFileReader.EXPECT().Read(tt.expectedMockArg0).Return(expectedMockReturn0, tt.expectedMockReturn1).Times(1)
+			mockFileReader := mock.NewMockFileReader(ctrl)
+			mockFileReader.EXPECT().Read(tt.expectedMockArg0).Return(expectedMockReturn0, tt.expectedMockReturn1).Times(1)
 
-			s := service.NewResumeService(suite.mockFileReader, tt.expectedMockArg0)
+			s := service.NewResumeService(mockFileReader, tt.expectedMockArg0)
 			actualBasic, err := s.GetBasic()
 			assertion.Equal(tt.expectedErr, err)
 			assertion.Equal(tt.resume.Basics, actualBasic)
@@ -99,8 +94,60 @@ func (suite *resumeServiceTestSuite) TestGetBasic() {
 	}
 }
 
-func (suite *resumeServiceTestSuite) TearDownTest() {
-	defer func() {
-		suite.ctrl.Finish()
-	}()
+func (suite *resumeServiceTestSuite) TestGetWhatsAppURL() {
+	testCases := []struct {
+		name                        string
+		resume                      entity.Resume
+		expectedMockArg0            string
+		generateExpectedMockReturn0 func(resume entity.Resume) ([]byte, error)
+		expectedMockReturn1         error
+		expectedErr                 error
+		expectedWhatsAppURL         string
+	}{
+		{
+			name: "success",
+			resume: entity.Resume{
+				Basics: entity.Basic{
+					Phone: "(+62) 896-5887-6167",
+				},
+			},
+			expectedMockArg0: "resume.json",
+			generateExpectedMockReturn0: func(resume entity.Resume) ([]byte, error) {
+				return json.Marshal(resume)
+			},
+			expectedMockReturn1: nil,
+			expectedErr:         nil,
+			expectedWhatsAppURL: "https://wa.me/6289658876167",
+		},
+		{
+			name:             "file not found",
+			resume:           entity.Resume{},
+			expectedMockArg0: "resume.json",
+			generateExpectedMockReturn0: func(resume entity.Resume) ([]byte, error) {
+				return nil, os.ErrNotExist
+			},
+			expectedMockReturn1: os.ErrExist,
+			expectedErr:         os.ErrExist,
+			expectedWhatsAppURL: "",
+		},
+	}
+
+	for _, tt := range testCases {
+		suite.T().Run(tt.name, func(t *testing.T) {
+			ctrl := gomock.NewController(t)
+			defer ctrl.Finish()
+
+			assertion := assert.New(t)
+
+			expectedMockReturn0, _ := tt.generateExpectedMockReturn0(tt.resume)
+			mockFileReader := mock.NewMockFileReader(ctrl)
+			mockFileReader.EXPECT().Read(tt.expectedMockArg0).Return(expectedMockReturn0, tt.expectedMockReturn1)
+
+			s := service.NewResumeService(mockFileReader, tt.expectedMockArg0)
+			actualWhatsAppURL, err := s.GetWhatsAppDotMeURL()
+			assertion.Equal(tt.expectedErr, err)
+			assertion.Equal(tt.expectedWhatsAppURL, actualWhatsAppURL)
+
+		})
+	}
 }

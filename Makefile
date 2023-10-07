@@ -4,4 +4,4 @@ generate:
 	go generate ./...
 
 test:
-	go test ./... -cover
+	go test ./... -cover -v

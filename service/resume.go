@@ -2,6 +2,8 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
+	"strings"
 
 	"github.com/mhdiiilham/resume/entity"
 )
@@ -34,4 +36,17 @@ func (s *ResumeService) GetBasic() (entity.Basic, error) {
 	}
 
 	return s.resume.Basics, nil
+}
+func (s *ResumeService) GetWhatsAppDotMeURL() (string, error) {
+	if err := s.loadResume(); err != nil {
+		return "", err
+	}
+
+	phoneNumber := s.resume.Basics.Phone
+	phoneNumber = strings.ReplaceAll(phoneNumber, "(", "")
+	phoneNumber = strings.ReplaceAll(phoneNumber, ")", "")
+	phoneNumber = strings.ReplaceAll(phoneNumber, "+", "")
+	phoneNumber = strings.ReplaceAll(phoneNumber, " ", "")
+	phoneNumber = strings.ReplaceAll(phoneNumber, "-", "")
+	return fmt.Sprintf("https://wa.me/%s", phoneNumber), nil
 }
