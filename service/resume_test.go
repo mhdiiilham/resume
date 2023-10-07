@@ -32,7 +32,7 @@ func (suite *resumeServiceTestSuite) TestGetBasic() {
 			name: "success",
 			resume: entity.Resume{
 				Basics: entity.Basic{
-					Name:    "Muhamad Ilham",
+					Name:    "Muhammad Ilham",
 					Label:   "Backend Engineer",
 					Image:   "",
 					Email:   "muhd.iiilham@gmail.com",
