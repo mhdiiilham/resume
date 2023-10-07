@@ -92,8 +92,9 @@ func (suite *resumeServiceTestSuite) TestGetBasic() {
 			suite.mockFileReader.EXPECT().Read(tt.expectedMockArg0).Return(expectedMockReturn0, tt.expectedMockReturn1).Times(1)
 
 			s := service.NewResumeService(suite.mockFileReader, tt.expectedMockArg0)
-			assertion.Equal(tt.expectedErr, s.LoadResume())
-			assertion.Equal(tt.resume.Basics, s.GetBasic())
+			actualBasic, err := s.GetBasic()
+			assertion.Equal(tt.expectedErr, err)
+			assertion.Equal(tt.resume.Basics, actualBasic)
 		})
 	}
 }

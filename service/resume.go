@@ -19,7 +19,7 @@ func NewResumeService(fileReader FileReader, filename string) *ResumeService {
 	}
 }
 
-func (s *ResumeService) LoadResume() error {
+func (s *ResumeService) loadResume() error {
 	bytesResume, err := s.fileReader.Read(s.filename)
 	if err != nil {
 		return err
@@ -28,6 +28,10 @@ func (s *ResumeService) LoadResume() error {
 	return json.Unmarshal(bytesResume, &s.resume)
 }
 
-func (s *ResumeService) GetBasic() entity.Basic {
-	return s.resume.Basics
+func (s *ResumeService) GetBasic() (entity.Basic, error) {
+	if err := s.loadResume(); err != nil {
+		return entity.Basic{}, err
+	}
+
+	return s.resume.Basics, nil
 }
