@@ -1,0 +1,4 @@
+.PHONY: .
+
+generate:
+	go generate ./...
