@@ -2,10 +2,16 @@ package service
 
 import (
 	"fmt"
-	"strings"
+	"regexp"
 
 	"github.com/mhdiiilham/resume/entity"
 )
+
+var re *regexp.Regexp
+
+func init() {
+	re = regexp.MustCompile(`[^0-9]`)
+}
 
 type ResumeService struct {
 	resume entity.Resume
@@ -22,11 +28,6 @@ func (s *ResumeService) GetBasic() entity.Basic {
 }
 
 func (s *ResumeService) GetWhatsAppDotMeURL() string {
-	phoneNumber := s.resume.Basics.Phone
-	phoneNumber = strings.ReplaceAll(phoneNumber, "(", "")
-	phoneNumber = strings.ReplaceAll(phoneNumber, ")", "")
-	phoneNumber = strings.ReplaceAll(phoneNumber, "+", "")
-	phoneNumber = strings.ReplaceAll(phoneNumber, " ", "")
-	phoneNumber = strings.ReplaceAll(phoneNumber, "-", "")
+	phoneNumber := re.ReplaceAllString(s.resume.Basics.Phone, "")
 	return fmt.Sprintf("https://wa.me/%s", phoneNumber)
 }
